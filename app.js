@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('@exortek/express-mongo-sanitize');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controlles/errorController');
@@ -98,6 +99,8 @@ app.use(
     ],
   }),
 );
+
+app.use(compression());
 
 // Test middleware
 app.use((req, res, next) => {
