@@ -7,6 +7,8 @@ const mongoSanitize = require('@exortek/express-mongo-sanitize');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
+
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controlles/errorController');
@@ -24,6 +26,18 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // 1) Global MIDDLEWARES
+// implement cors
+app.use(cors());
+
+// Access-Control-Allow_origin
+// get access to spicific frontend like (natours.com)
+// app.use(cors({
+//   origin: 'https://www.natours.com'
+// }));
+
+app.options('*' , cors())
+// app.options('/api/v1/tours/:id' , cors())
+
 // Set security HTTP headers
 // Serving static files
 app.set('query parser', 'extended');
